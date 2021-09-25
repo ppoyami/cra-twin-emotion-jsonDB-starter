@@ -15,7 +15,7 @@ exports.create_posts = (req, res) => {
     const posts = getPosts();
     posts.unshift(newPost);
     setPosts(posts);
-    req.send(posts);
+    res.send(posts);
   } catch (e) {
     res.status(404).send({ error: e });
   }

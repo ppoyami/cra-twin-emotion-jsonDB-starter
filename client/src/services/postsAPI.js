@@ -9,7 +9,7 @@ export default class PostsAPI {
   }
 
   async createPost(data) {
-    const res = await this.client.post('/posts/create', data);
+    const res = await this.client.post('/posts', data);
     return res.data;
   }
 

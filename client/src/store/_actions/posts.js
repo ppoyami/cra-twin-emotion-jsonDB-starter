@@ -3,7 +3,7 @@ import postAPI from '@/services';
 
 export const loadPosts = createAsyncThunk('posts/load', async (_, thunkAPI) => {
   try {
-    return await postAPI.loadPosts();
+    return await postAPI.getPosts();
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.data);
   }

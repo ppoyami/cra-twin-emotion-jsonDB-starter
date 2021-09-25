@@ -1,18 +1,24 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import tw, { styled } from 'twin.macro';
+import { updatePost, deletePost } from '@/store/_actions/posts';
 import EditForm from './EditForm';
 
-export default function Card({ title, desc }) {
+export default function Card({ id, title, desc }) {
   const [edit, setEdit] = useState(false);
   const formRef = useRef(null);
+  const dispatch = useDispatch();
+
   const closeEdit = () => {
     setEdit(false);
   };
   const openEdit = () => {
     setEdit(true);
   };
+
   // M: submit 이벤트 버블링 설정하지 않으면, 컴포넌트에서 onSubmit 이벤트가 발생하지 않음
   const onUpdate = () => {
     formRef.current.dispatchEvent(
@@ -21,17 +27,24 @@ export default function Card({ title, desc }) {
   };
   const onDelete = () => {
     setEdit(false);
+    dispatch(deletePost(id));
   };
+
   const onSubmit = (e, value) => {
     e.preventDefault();
-    console.log(value);
+    dispatch(updatePost({ id, ...value }));
   };
+
   return (
     <Container>
       {edit ? (
         <>
           <Wrapper>
-            <EditForm ref={formRef} onSubmit={onSubmit} />
+            <EditForm
+              ref={formRef}
+              initialValue={{ title, desc }}
+              onSubmit={onSubmit}
+            />
           </Wrapper>
         </>
       ) : (
@@ -53,11 +66,13 @@ export default function Card({ title, desc }) {
 }
 
 Card.defaultProps = {
+  id: null,
   title: '',
   desc: '',
 };
 
 Card.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string]),
   title: PropTypes.string,
   desc: PropTypes.string,
 };
