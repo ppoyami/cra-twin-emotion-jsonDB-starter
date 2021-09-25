@@ -2,8 +2,7 @@
 import { DocumentAddIcon } from '@heroicons/react/outline';
 import { useRef, useState, useEffect } from 'react';
 import tw, { styled } from 'twin.macro';
-import Input from '../shared/Input';
-import TextArea from '../shared/TextArea';
+import EditForm from '../shared/EditForm';
 
 export default function CreateCard() {
   const [edit, setEdit] = useState(false);
@@ -23,13 +22,13 @@ export default function CreateCard() {
     if (formRef.current?.contains(e.target)) return;
     setEdit(prev => !prev);
   };
+
   return (
     <Container onClick={onToggle}>
       {edit ? (
-        <Form ref={formRef}>
-          <Input />
-          <TextArea />
-        </Form>
+        <div ref={formRef}>
+          <EditForm />
+        </div>
       ) : (
         <AddIcon>
           <DocumentAddIcon />
@@ -45,4 +44,3 @@ const Container = styled.div(() => [
 const AddIcon = styled.span(() => [
   tw`text-primary flex items-center justify-center w-3/5 h-3/5 p-2`,
 ]);
-const Form = styled.form(() => [tw`flex flex-col items-center`]);
