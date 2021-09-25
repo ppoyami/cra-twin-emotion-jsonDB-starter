@@ -1,14 +1,11 @@
 import { Switch, Route } from 'react-router-dom';
-import tw from 'twin.macro';
 import Home from '@/pages/Home';
-
-const styles = {
-  layout: tw`flex justify-center items-center`,
-};
+import Nav from '@/components/shared/Nav';
 
 export default function App() {
   return (
-    <div css={styles.layout}>
+    <div>
+      <Nav />
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>

@@ -1,16 +1,26 @@
-import Button from '@/components/shared/Button';
-import { useThemeContext } from '@/contexts/themeContext';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import tw, { styled } from 'twin.macro';
+
+import { loadPosts } from '@/store/_actions/posts';
+import Grid from '@/components/Home/Grid';
 
 export default function Home() {
-  const { theme, setTheme } = useThemeContext();
-  const onToggle = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  const { mainPosts, createPostLoading, updatePostLoading, deletePostLoading } =
+    useSelector(state => state.posts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadPosts());
+  }, []);
+
+  if (createPostLoading || updatePostLoading || deletePostLoading)
+    return <span>로딩 중...</span>;
+
   return (
-    <div>
-      <Button onClick={onToggle} variant="secondary">
-        Current Mode is {theme === 'dark' ? 'DARK' : 'LIGHT'}
-      </Button>
-    </div>
+    <Layout>
+      <Grid data={mainPosts} />
+    </Layout>
   );
 }
+const Layout = styled.div(() => [tw`pt-20 px-8`]);
