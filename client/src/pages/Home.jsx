@@ -1,16 +1,11 @@
-import Button from '@/components/shared/Button';
-import { useThemeContext } from '@/contexts/themeContext';
+import tw, { styled } from 'twin.macro';
+import Grid from '@/components/Home/Grid';
 
 export default function Home() {
-  const { theme, setTheme } = useThemeContext();
-  const onToggle = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
   return (
-    <div>
-      <Button onClick={onToggle} variant="secondary">
-        Current Mode is {theme === 'dark' ? 'DARK' : 'LIGHT'}
-      </Button>
-    </div>
+    <Layout>
+      <Grid />
+    </Layout>
   );
 }
+const Layout = styled.div(() => [tw`pt-20 px-8`]);

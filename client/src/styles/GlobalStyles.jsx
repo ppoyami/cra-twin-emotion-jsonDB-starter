@@ -20,7 +20,7 @@ const customStyles = css`
     --color-primary: #2563eb;
   }
   body {
-    ${tw`h-screen flex justify-center items-center bg-primary text-primary font-body`}
+    ${tw`h-screen bg-primary text-primary font-body`}
   }
 `;
 
