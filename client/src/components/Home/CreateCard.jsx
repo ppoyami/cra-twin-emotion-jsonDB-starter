@@ -62,6 +62,4 @@ const Wrapper = styled.div(() => [tw`flex flex-col items-center `]);
 const AddIcon = styled.span(() => [
   tw`text-primary flex items-center justify-center w-3/5 h-3/5 p-2`,
 ]);
-const Button = styled.button(() => [
-  tw`w-3/4 text-primary bg-primary absolute bottom-1`,
-]);
+const Button = styled.button(() => [tw`w-full text-secondary  mt-3`]);
