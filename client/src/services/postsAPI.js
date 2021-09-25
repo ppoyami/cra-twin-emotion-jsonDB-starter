@@ -8,17 +8,17 @@ export default class PostsAPI {
     return res.data;
   }
 
-  createPost(data) {
+  async createPost(data) {
     const res = await this.client.post('/posts/create', data);
     return res.data;
   }
 
-  updatePost(id, data) {
+  async updatePost(id, data) {
     const res = await this.client.put(`/posts/${id}`, data);
     return res.data;
   }
 
-  deletePost(id) {
+  async deletePost(id) {
     const res = await this.client.delete(`/posts/${id}`);
     return res.data;
   }
